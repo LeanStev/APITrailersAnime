@@ -59,7 +59,7 @@
     <form action="" method="post" th:object="${anime}" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="titulo" class="form-label">Titulo :</label>
-            <input type="text" id="titulo" placeholder="Digite el titulo" class="form-control" th:field="*{titulo}">
+            <input id="titulo" placeholder="Digite el titulo" class="form-control" th:field="*{titulo}">
             <div class="invalid-feedback" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}">
 
             </div>
@@ -67,7 +67,7 @@
 
         <div class="mb-3">
             <label for="sinopsi" class="form-label">Sinopsis: </label>
-            <input type="text" id="sinopsi" placeholder="Digite la sinopsis" class="form-control" th:field="*{sinopsis}">
+            <textarea type="text" id="sinopsi" placeholder="Digite la sinopsis" class="form-control" th:field="*{sinopsis}"></textarea>
             <div class="invalid-feedback" th:if="${#fields.hasErrors('sinopsis')}" th:errors="*{sinopsis}">
 
             </div>
@@ -75,7 +75,7 @@
 
         <div class="mb-3">
             <label for="fecha" class="form-label">Fecha de estreno: </label>
-            <input type="text" id="fecha" placeholder="Digite la fecha de estreno" class="form-control" th:field="*{fechaEstreno}">
+            <input type="date" id="fecha" placeholder="Digite la fecha de estreno" class="form-control" th:field="*{fechaEstreno}">
             <div class="invalid-feedback" th:if="${#fields.hasErrors('fechaEstreno')}" th:errors="*{fechaEstreno}">
 
             </div>
@@ -83,7 +83,7 @@
 
         <div class="mb-3">
             <label for="youtubeTrailer" class="form-label">Youtube trailer id: </label>
-            <input type="text" id="youtubeTrailer" placeholder="Digite la fecha de estreno" class="form-control" th:field="*{youtubeTrailerId}">
+            <input type="text" id="youtubeTrailer" placeholder="Digite el ID del trailer" class="form-control" th:field="*{youtubeTrailerId}">
             <div class="invalid-feedback" th:if="${#fields.hasErrors('youtubeTrailerId')}" th:errors="*{youtubeTrailerId}">
 
             </div>
@@ -91,15 +91,21 @@
 
         <div class="mb-3">
             <label for="portada" class="form-label">Portada: </label>
-            <input type="file" name="portada" id="portada"  class="form-control" th:field="*{portada}">
-            <div class="invalid-feedback" th:if="${#fields.hasErrors('portada')}" th:errors="*{portada}">
+            <input type="file"
+                   name="portada"
+                   id="portada"
+                   class="form-control"
+                   th:field="*{portada}">
+            <div class="invalid-feedback"
+                 th:if="${#fields.hasErrors('portada')}"
+                 th:errors="*{portada}">
 
             </div>
         </div>
 
         <div class="mb-3">
             <label for="generos" class="form-label">Genero: </label>
-            <select id="generos" class="form-control" th:fields="*{generos}" multiple>
+            <select id="generos" class="form-control" th:field="*{generos}" multiple>
                 <option th:each="genero : ${generos}" th:value="${genero.id}" th:text="${genero.titulo}"></option>
             </select>
             <div class="invalid-feedback" th:if="${#fields.hasErrors('generos')}" th:errors="*{generos}">

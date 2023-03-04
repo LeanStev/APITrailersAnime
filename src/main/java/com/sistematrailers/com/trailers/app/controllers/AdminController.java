@@ -14,7 +14,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -47,5 +50,23 @@ public class AdminController {
                 .addObject("generos",generos);
     }
 
+    @PostMapping("/animes/nuevo")
+    public ModelAndView registrarAnime(@Validated Anime anime, BindingResult bindingResult){
+        if (bindingResult.hasErrors() || anime.getPortada().isEmpty()){
+            if (anime.getPortada().isEmpty()){
+                bindingResult.rejectValue("portada","MultipartNotEmpty");
+
+            }
+            List<Genero> generos = generoRepositorio.findAll(Sort.by("titulo"));
+            return new ModelAndView("admin/nuevo-anime")
+                    .addObject("anime", anime)
+                    .addObject("generos",generos);
+        }
+        String rutaPortada = servicio.almacenarArchivo(anime.getPortada());
+        anime.setRutaPortada(rutaPortada);
+
+        animeRepositorio.save(anime);
+        return new ModelAndView("redirect:/admin");
+    }
 
 }
