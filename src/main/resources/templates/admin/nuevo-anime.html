@@ -19,7 +19,7 @@
             margin-top:100px!important;
         }
     </style>
-    <title>Anime Trailers</title>
+    <title>Administracion</title>
 </head>
 <body>
 <!--NAVBAR-->
@@ -53,39 +53,65 @@
 <!--NAVBAR-->
 
 <div class="container my-5 containerPrincipal">
-    <h2>Animes</h2>
 
-    <div class="text-end">
-        <a href="/admin/animes/nuevo" class="btn btn-primary mb-3">
-            Agregar anime
+    <h2>Registro de Anime</h2>
+    <br>
+    <form action="" method="post" th:object="${anime}" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Titulo :</label>
+            <input type="text" id="titulo" placeholder="Digite el titulo" class="form-control" th:field="*{titulo}">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}">
 
-        </a>
-    </div>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th></th>
-            <th>Anime</th>
-            <th>F.Estreno</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="anime: ${animes}" th:object="${anime}">
-            <td></td>
-            <td>
-                <div th:text="*{titulo}" class="fs-5 fs-bold"></div>
-                <p th:text="*{sinopsis}"></p>
-                <div>
-                    <span class="badge rounded-pill bg-light text-dark me-1" th:each="genero: ${generos}" th:text="${genero.titulo}">
-                    </span>
-                </div>
-            </td>
-            <td th:text="*{#temporals.format(fechaEstreno,'dd/mm/yyyy')}"></td>
-            <td>  </td>
-        </tr>
-        </tbody>
-    </table>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="sinopsi" class="form-label">Sinopsis: </label>
+            <input type="text" id="sinopsi" placeholder="Digite la sinopsis" class="form-control" th:field="*{sinopsis}">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('sinopsis')}" th:errors="*{sinopsis}">
+
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="fecha" class="form-label">Fecha de estreno: </label>
+            <input type="text" id="fecha" placeholder="Digite la fecha de estreno" class="form-control" th:field="*{fechaEstreno}">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('fechaEstreno')}" th:errors="*{fechaEstreno}">
+
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="youtubeTrailer" class="form-label">Youtube trailer id: </label>
+            <input type="text" id="youtubeTrailer" placeholder="Digite la fecha de estreno" class="form-control" th:field="*{youtubeTrailerId}">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('youtubeTrailerId')}" th:errors="*{youtubeTrailerId}">
+
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="portada" class="form-label">Portada: </label>
+            <input type="file" name="portada" id="portada"  class="form-control" th:field="*{portada}">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('portada')}" th:errors="*{portada}">
+
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="generos" class="form-label">Genero: </label>
+            <select id="generos" class="form-control" th:fields="*{generos}" multiple>
+                <option th:each="genero : ${generos}" th:value="${genero.id}" th:text="${genero.titulo}"></option>
+            </select>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('generos')}" th:errors="*{generos}">
+
+            </div>
+        </div>
+
+        <div class="text-end">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+
+    </form>
 </div>
 
 
