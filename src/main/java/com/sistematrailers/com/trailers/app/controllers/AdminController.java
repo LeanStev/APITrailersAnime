@@ -39,7 +39,7 @@ public class AdminController {
     @GetMapping("")
     public ModelAndView verPaginaDeInicio(@PageableDefault(sort = "titulo",size = 5)Pageable pageable){
         Page<Anime> animes = animeRepositorio.findAll(pageable);
-        return new ModelAndView("index").addObject("animes",animes);
+        return new ModelAndView("admin/index").addObject("animes",animes);
     }
 
     @GetMapping("/animes/nuevo")
