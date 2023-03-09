@@ -75,8 +75,8 @@
              </thead>
              <tbody>
              <tr th:each="anime: ${animes}" th:object="${anime}">
-                 <td style="width:150px;">
-                     <a th:href="@{/assets/{filename}(filename=*{rutaPortada})}" data-fancybox data-caption="Single image"> <!--Data fancybox nos permite ver la imagen como un modal-->
+                 <td style="width:150px;">                                             <!--Data fancybox nos permite ver la imagen como un modal-->
+                     <a th:href="@{/assets/{filename}(filename=*{rutaPortada})}" data-fancybox >
                      <img th:src="@{/assets/{filename}(filename=*{rutaPortada})}" alt="" class="img-thumbnail w-100"> </a>
                     
                  </td>
@@ -92,10 +92,27 @@
                  </td>
                  <td th:text="*{#temporals.format(fechaEstreno,'dd/MM/yyyy')}"></td>
                  <td>  </td>
+                 <td class="text-end">
+                     <a th:href="@{/admin/animes/{id}/editar(id=*{id})}" class="btn btn-warning">Editar</a>
+                     <a href="javascript:void(0)" class="btn btn-danger mt-3" th:onclick="'eliminarAnime(' + *{id} +')'">Eliminar</a>
+                     <form th:id="'eliminarAnimeForm' + *{id}" th:action="@{/admin/animes/{id}/eliminar(id=*{id})}" method="post" class="d-none"></form>
+
+                 </td>
+
              </tr>
              </tbody>
          </table>
-
  </div>
+
+<div layout:fragment="scripts">
+    <script>
+        function eliminarAnime(id){
+        if(!confirm('¿Estas seguro de eliminar este anime?')){
+        return;
+        }
+        $('#eliminarAnimeForm' + id).submit();
+        }
+    </script>
+</div>
 </body>
 </html>
