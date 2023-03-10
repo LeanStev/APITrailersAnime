@@ -8,6 +8,7 @@ import com.sistematrailers.com.trailers.app.service.AlmacenServicioImpl;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.thymeleaf.dialect.springdata.SpringDataDialect;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -28,7 +30,10 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-
+    @Bean
+    public SpringDataDialect springDataDialect() {
+        return new SpringDataDialect();
+    }
     @Autowired
     private AnimeRepositorio animeRepositorio;
 
@@ -43,6 +48,7 @@ public class AdminController {
         Page<Anime> animes = animeRepositorio.findAll(pageable);
         return new ModelAndView("admin/index").addObject("animes", animes);
     }
+
 
     @GetMapping("/animes/nuevo")
     public ModelAndView mostrarFormularioDeNuevoAnime() {
