@@ -53,7 +53,8 @@
     </div>
 </nav>
 
-     <div layout:fragment="content" class="my-5 containerPrincipal">
+     <div layout:fragment="content"
+          class="my-5 containerPrincipal">
 
         <div class="bg-light p-5 rounded">
             <h1 class="display-1 text-success">Bienvenido a AnimeTrailers</h1>
@@ -63,12 +64,18 @@
          <div class="text-danger mt-5">Ultimos estrenos</div>
 
          <div class="row">
-             <div class="col-md-3 my-5" th:each="anime : ${ultimosAnimes}" th:object="${anime}">
-                 <a th:href="@{/animes/{id}(id=*{id})}" class="card shadow-lg" style="text-decoration:none;">
-                     <img th:src="@{/assets/{filename}(filename=*{rutaPortada})}" th:alt="*{titulo}" class="card-img-top">
+             <div class="col-md-3 my-5"
+                  th:each="anime : ${animes}"
+                  th:object="${anime}">
+                 <a th:href="@{/animes/{id}(id=*{id})}"
+                    class="card shadow-lg"
+                    style="text-decoration:none;">
+                     <img th:src="@{/assets/{filename}(filename=*{rutaPortada})}"
+                          th:alt="*{titulo}" class="card-img-top">
                      <div class="card-body">
                          <h2 class="card-title fs-6" th:text="*{titulo}"></h2>
-                         <p th:text="*{#temporals.format(fechaEstreno,'dd/MM/yyyy')}" class="text-muted small"></p>
+                         <p th:text="*{#temporals.format(fechaEstreno,'dd/MM/yyyy')}"
+                            class="text-muted small"></p>
                      </div>
                  </a>
              </div>
