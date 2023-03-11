@@ -2,7 +2,7 @@
 
 //Pagina web de trailers de animes, donde se puede añadir, editar , listar los animes, con portada y reproduccion de videos.
 
-<h3>#Aun falta por añadir estilos en generla a toda la pagina pero ire documentando los cambios en imagenes aqui#</h3>
+<h3>#Aun falta por añadir estilos en general a toda la pagina pero ire documentando los cambios en imagenes aqui#</h3>
 
 
 <h2>Pagina Inicial/Home<h2>
